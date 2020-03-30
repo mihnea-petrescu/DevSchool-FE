@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My layout</title>
+    <meta charset="utf-8">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            margin: 0;
+        }
+
+        header {
+            background: gold;
+        }
+
+        footer {
+            background: tomato;
+        }
+
+        aside {
+            background: deepskyblue;
+        }
+
+        main {
+            background: lightgreen;
+            display: flex;
+            flex: 1;
+        }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>My website</h1>
+      <p>Lorem ipsum dolor sit amet</p>
+      <form>
+        <label for="search">Search this website</label>
+        <input id="search" type="search" name="q" placeholder="Search me" autofocus>
+        <button>Go</button>
+      </form>
+    </header>
+
+    <main>
+      <aside>
+        <nav>MY MENU</nav>
+      </aside>
+      <div id="content">
+        Some content
+      </div>
+    </main>
+
+    <footer>Copyright &copy; 2020</footer>
+  </body>
+
+</html>

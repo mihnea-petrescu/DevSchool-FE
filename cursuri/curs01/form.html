@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Business Card</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+      <form>
+          <h1>Personal information</h1>
+
+          <p>
+              <label for="fullname">Please enter your name:</label>
+              <input id="fullname" type="text" required minlength="2" maxlength="100" placeholder="First and last name">
+          </p>
+
+          <p>
+              <label for="mail">Please provide your email address:</label>
+              <input id="mail" type="email" required >
+          </p>
+
+          <p>
+            <label for="phone">Please provide your phone number:</label>
+            <input id="phone" type="tel" required >
+          </p>
+
+          <p>
+            <label>
+                Please provide your URL:
+                <input id="url" type="url" maxlength="200">
+                <small>(optional)</small>
+            </label>
+          </p>
+
+          <p>
+            <label>
+                Please provide your age:
+                <input type="number" min="18" max="45">
+                <small>(optional)</small>
+            </label>
+          </p>
+
+          <p>
+            <label>
+                What is your birthday?
+                <input type="date" min="2002-01-01" max="2020-03-26">
+                <small>(optional)</small>
+            </label>
+          </p>
+
+          <p>
+            <label for="droplist">Please choose a favourite vegetable:</label>
+            <select id="droplist">
+                <option>---</option>
+                <option>broccoli</option>
+                <option>carrot</option>
+            </select>
+          </p>
+
+          <p>
+            <label>What is your favourite fruit?</label>
+            <input type="text" list="list-fruit" pattern="[Bb]anana|[Mm]ango|[Pp]each">
+            <small>(optional)</small>
+            <datalist id="list-fruit">
+              <option>banana</option>
+              <option>mango</option>
+              <option>peach</option>
+            </datalist>
+          </p>
+
+          <p>
+            <label>Choose your favourite colour:</label>
+            <input type="color" value="#FF0000">
+          </p>
+
+          <p>
+            <label>What is your usual wakeup time?</label>
+            <input type="time">
+            <small>(optional)</small>
+          </p>
+
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
+      </form>
+  </body>
+
+</html>
