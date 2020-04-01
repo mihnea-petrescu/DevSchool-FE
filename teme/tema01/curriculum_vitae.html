@@ -1,12 +1,78 @@
+<!-- Author: Mihnea-Andrei Petrescu @ DevSchool, 13th -->
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>My CV</title>
     <meta charset="utf-8">
     <style>
+      html {
+          height: 100%;
+          color: #000033;
+          background-color: #FF6200;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0;
+      }
+
+      header {
+        border-bottom: 5px #000066 solid;
+      }
+
+      aside {
+        border-right: 3px #000066 solid;
+        float: left;
+        margin-left: 0.5em;
+      }
+
+      main {
+        display: flex;
+        flex: 1;
+      }
+
+      div > p {
+        margin-left: 1em;
+      }
+
+      div > div {
+        border-bottom: 3px #000066 solid;
+      }
+
+      header > * {
+        margin-left: 0.5em;
+      }
+
+
       @media print {
         #printButton {
         display: none;
+        }
+
+        aside {
+        width: 15%;
+        height: 82%;
+        }
+
+        #hobbies {
+          border-bottom: 3px #FF6200 solid;
+        }
+
+        #wrapper {
+        min-width: 85%;
+        }
+      }
+
+      @media screen {
+        aside {
+        width: 7%;
+        }
+
+        #wrapper {
+        min-width: 93%;
         }
       }
     </style>
@@ -15,15 +81,112 @@
   <body>
     <header>
       <h1>Mihnea-Andrei Petrescu</h1>
-      <p>Student, Teaching Assistant, Volunteer</p>
-      <p><q>Teaching what I learn.</q></p>
+      <p><q>Teaching what I learn.</q> - Student, Teaching Assistant, Volunteer</p>
       <address>
-        <p>Phone: <a href="tel:+40722552337">0722 552 337</a></p>
-        <p>Email: <a href="mailto:petrescu.mihnea@gmail.com">petrescu.mihnea [at] gmail.com</a></p>
-        <p>Website: <a href="https://www.github.com/mihnea-petrescu">Github</a></p>
-    </address>
+        <p>Phone: <a href="tel:+40722552337">0722 552 337</a>  Email: <a href="mailto:petrescu.mihnea@gmail.com">petrescu.mihnea [at] gmail.com</a> Website: <a href="https://www.github.com/mihnea-petrescu">Github</a></p>
+      </address>
     </header>
 
-    <button id="printButton" onClick="window.print();">Print</button>
+    <main>
+      <aside>
+        <h2>Work experience</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2>Skills</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2>Awards</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2>Education</h2>
+        <br>
+        <br>
+        <br>
+        <h2>Hobbies</h2>
+        <br>
+      </aside>
+
+      <div id="wrapper">
+        <div id="work-experience">
+          <p>2017 - present: Teaching Assistant [at] Faculty of Automatic Control and Computer Science
+            <br>
+            Teaching OOP, Electronics and Introduction to Networking
+          </p>
+    
+          <p>Summer 2019: Software Engineering Intern [at] Thales Romania
+            <br>
+            Developing internal tools for software testing
+          </p>
+          
+          <p>Summer 2018: Software Embedded Engineering Intern [at] NXP Semiconductors Romania
+            <br>
+            Working on driver code tutorials for a development board IDE
+          </p>
+        </div>
+
+        <div id="skills">
+          <p>Linux <br>
+            Java <br>
+            OOP Design <br>
+            Networking <br>
+            Problem Solving <br>
+            Python</p>
+        </div>
+
+        <div id="awards">
+          <p>2019: J.P. Morgan Code for Good
+            <br>
+            Ranked 2 in participating category
+          </p>
+    
+          <p>2018: Hard&Soft Suceava Contest
+            <br>
+            Ranked 4 with Honorable Mention
+          </p>
+          
+          <p>2017: Perpetuum Contest in Bucharest
+            <br>
+            Winning project; inaugural edition
+          </p>
+        </div>
+
+        <div id="education">
+          <p>
+            2019 - 2021: University "Politehnica" of Bucharest
+            <br>
+            Master of Engineering in Advanced Computer Architectures
+          </p>
+  
+          <p>
+            2015 - 2019: University "Politehnica" of Bucharest
+            <br>
+            Bachelor of Science in Computer Science
+          </p>
+        </div>
+
+        <div id="hobbies">
+          <p>Photography <br>
+            Videography <br>
+            Datacenter Computing <br>
+            Basketball <br>
+            Electrionics <br>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <button id="printButton" onClick="window.print();">Print</button>
+    </footer>
+
+    
   </body>
 </html>
