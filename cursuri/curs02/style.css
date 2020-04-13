@@ -1,0 +1,42 @@
+h1 {
+    color: red;
+}
+
+ul li {
+    font-size: large;
+}
+
+ul li:first-child {
+    font-size: x-large;
+}
+
+a:visited {
+    color: deeppink;
+}
+
+a:hover {
+    font-size: xx-large;
+}
+
+a:active {
+    color: deepskyblue;
+}
+
+#hide {
+    display: none;
+    background-color: pink;
+    padding: 20px;
+}
+
+div#hover:hover p#hide{
+    display: block;
+}
+
+ul li:nth-child(1)::first-letter {
+    color: orange;
+    font-size: xx-large;
+}
+
+p, li {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
