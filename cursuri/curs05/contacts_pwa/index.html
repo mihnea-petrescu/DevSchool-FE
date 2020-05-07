@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contact management</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="mediumseagreen" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="contacts-192.png" />
+    <script type="module">
+      import { init } from './index.js';
+      init();
+    </script>
+  </head>
+
+  <body>
+    <h1>My contacts</h1>
+
+    <form id="form-add">
+      <input type="text" name="name" id="name" placeholder="Name" required />
+      <input type="email" name="email" id="email" placeholder="E-mail" />
+      <input type="tel" name="phone" id="phone" placeholder="Phone" />
+      <button type="submit">Add</button>
+    </form>
+
+    <form id="form-delete" hidden>
+      <ul id="list"></ul>
+      <button type="submit" name="delete" disabled>Delete selected contacts</button>
+    </form>
+  </body>
+</html>
