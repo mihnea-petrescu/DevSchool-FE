@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit-element';
 import { read } from './storage.js';
-import './AddComp';
-import './ListComp';
+import './TodoAdd';
+import './TodoList';
 
-export class AppMain extends LitElement {
+export class TodoMain extends LitElement {
   static get properties() {
     return {
       notes: { type: String },
@@ -17,8 +17,8 @@ export class AppMain extends LitElement {
 
   render() {
     return html`
-      <add-comp @notes-changed=${this._onNotesChanged}></add-comp>
-      <list-comp @notes-changed=${this._onNotesChanged} notes=${this.notes}></list-comp>
+      <todo-add @notes-changed=${this._onNotesChanged}></todo-add>
+      <todo-list @notes-changed=${this._onNotesChanged} notes=${this.notes}></todo-list>
     `;
   }
 

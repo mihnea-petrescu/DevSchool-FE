@@ -1,0 +1,49 @@
+html {
+  height: 100%;
+  background: linear-gradient(to right, #cccbc4, #f2f2f2, #dbdbdb, #eaeaea);
+  background-repeat: repeat-y;
+  display: block;
+}
+
+ul {
+  list-style-type: none;
+  float: right;
+  position: fixed;
+  right: 0;
+  margin-right: 1rem;
+  top: 0;
+  margin-top: 2rem;
+  border: 0.1rem solid black;
+}
+
+li {
+  font-size: 1.5rem;
+  padding-right: 1rem;
+}
+
+span {
+  float: left;
+  width: 8rem;
+  height: 1rem;
+  margin: 0.2rem;
+}
+
+#debug {
+  background-color: #aaaaaa;
+}
+
+#info {
+  background-color: #008080;
+}
+
+#warn {
+  background-color: #fedc32;
+}
+
+#error {
+  background-color: #b22222;
+}
+
+#critical {
+  background-color: red;
+}

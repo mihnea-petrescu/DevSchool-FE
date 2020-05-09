@@ -3,11 +3,21 @@
   <head>
     <title>My TODOl list</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="index.css" />
     <script src="dist/bundle.js"></script>
   </head>
 
   <body>
     <h1>My TODO list</h1>
-    <app-main></app-main>
+
+    <ul>
+      <li><span id="debug"></span> Debug</li>
+      <li><span id="info"></span> Info</li>
+      <li><span id="warn"></span> Warn</li>
+      <li><span id="error"></span> Error</li>
+      <li><span id="critical"></span> Critical</li>
+    </ul>
+
+    <todo-main></todo-main>
   </body>
 </html>
