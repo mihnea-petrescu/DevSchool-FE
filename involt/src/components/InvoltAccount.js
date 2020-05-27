@@ -1,6 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
 import { read, write, clear } from '../storage';
-import { until } from 'lit-html/directives/until.js';
 
 class InvoltAccount extends LitElement {
   static get properties() {
@@ -63,15 +62,85 @@ class InvoltAccount extends LitElement {
       }
 
       .intro {
-        padding: 0.5rem;
-        border: 0.1rem solid #ff6200;
+        padding-bottom: 0.5rem;
         display: inline-block;
       }
 
       .email,
       .password {
         display: block;
-        margin: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .transaction {
+        padding: 0.8rem;
+        border-radius: 2rem;
+        display: inline-block;
+        color: white;
+      }
+
+      .FROM {
+        background-color: #ff6200;
+      }
+
+      .TO {
+        background-color: #0b84f6;
+      }
+
+      .account {
+        font-weight: 700;
+      }
+
+      ul,
+      li {
+        list-style-type: none;
+      }
+
+      .one-transaction {
+        display: inline-block;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 3rem;
+        margin-left: 1rem;
+      }
+
+      .logo-container {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+      }
+
+      .change-data {
+        grid-column: 1;
+        grid-row: 2;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+      }
+
+      .add-account {
+        grid-column: 1;
+        grid-row: 3;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+      }
+
+      .make-transaction {
+        grid-column: 1;
+        grid-row: 4;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+      }
+
+      .transaction-history {
+        grid-column: 2;
+        grid-row: 2 / 5;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+      }
+
+      .logout {
+        grid-column: 1 / 3;
+        grid-row: 5;
+        border: 1px solid rgba(0, 0, 0, 0.8);
       }
     `;
   }
@@ -87,6 +156,68 @@ class InvoltAccount extends LitElement {
       displayableAccount.transactionHistory.sort((a, b) => b.timestamp - a.timestamp);
     });
 
+    const changeData = html` <p class="intro">
+        <strong>About: ${this.clientData.firstName} ${this.clientData.lastName} </strong>
+      </p>
+
+      <form class="email">
+        <input type="email" size="30" value=${this.clientData.email} disabled />
+        <button @click=${this._onEditEmail}>Change Email</button>
+        <button @click=${this._onSaveEmail} hidden>Save</button>
+        <button @click=${this._onCancelEmail} hidden>Cancel</button>
+      </form>
+
+      <form class="password">
+        <input type="password" name="oldPassword" placeholder="Old Password" hidden />
+        <input
+          type="password"
+          name="newPassword"
+          placeholder="New Password"
+          title="Password should be at leat 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character (!@#$%^&*_=+-)"
+          hidden
+        />
+        <button @click=${this._onChangePassword}>Change Password</button>
+        <button @click=${this._onSaveNewPassword} hidden>Save</button>
+        <button @click=${this._onCancelPassword} hidden>Cancel</button>
+      </form>`;
+
+    const addAccount = html` <form @submit=${this._onCreateAccount}>
+      <h3>Add a new account</h3>
+      <input type="number" name="balance" placeholder="Initial deposit" />
+      <select name="currency">
+        <option value="RON">RON</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="JPY">JPY</option>
+        <option value="GBP">GBP</option>
+      </select>
+      <button type="submit">Create Account</button>
+    </form>`;
+
+    const makeTransaction = html`<h3>Make a transaction</h3>
+      <form @submit=${this._onMakeTransaction}>
+        <label>From:</label>
+        <select name="fromAccountNumber">
+          ${this.displayableAccounts.map(
+            account =>
+              html`<option value=${account.accountNumber}>${account.accountNumber}</option>`
+          )}
+        </select>
+
+        <label>To:</label>
+        <input name="toAccountNumber" type="text" placeholder="Account Number" />
+
+        <input min="1" max="10000" name="amount" type="number" placeholder="Amount" />
+        <select name="currency">
+          <option value="RON">RON</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+          <option value="JPY">JPY</option>
+          <option value="GBP">GBP</option>
+        </select>
+        <button type="submit">Transfer</button>
+      </form>`;
+
     const accountsDisplay =
       this.displayableAccounts.length === 0
         ? html` <p>
@@ -98,7 +229,7 @@ class InvoltAccount extends LitElement {
               ${this.displayableAccounts.map(
                 account =>
                   html`<li>
-                    <p>
+                    <p class="account">
                       Number: ${account.accountNumber} Balance: ${account.balance} Currency:
                       ${account.currency}
                     </p>
@@ -108,8 +239,8 @@ class InvoltAccount extends LitElement {
                     <ul hidden>
                       ${account.transactionHistory.map(
                         transaction =>
-                          html`<li>
-                            <p>
+                          html`<li class="one-transaction">
+                            <p class="transaction ${transaction.direction}">
                               <strong>${transaction.direction}</strong> Name:
                               ${transaction.firstName} ${transaction.lastName} Account:
                               ${transaction.accountNumber} Amount: ${transaction.amount} Currency:
@@ -121,67 +252,31 @@ class InvoltAccount extends LitElement {
                     </ul>
                   </li>`
               )}
-            </ul>
+            </ul>`;
 
-            <h3>Make a transaction</h3>
-            <form @submit=${this._onMakeTransaction}>
-              <label>From:</label>
-              <select name="fromAccountNumber">
-                ${this.displayableAccounts.map(
-                  account =>
-                    html`<option value=${account.accountNumber}>${account.accountNumber}</option>`
-                )}
-              </select>
+    return html` <div class="grid-container">
+      <div class="logo-container">
+        <img src="media/logo.svg" width="328px" height="74px" />
+      </div>
 
-              <label>To:</label>
-              <input name="toAccountNumber" type="text" placeholder="Account Number" />
+      <div class="change-data">
+        ${changeData}
+      </div>
 
-              <input name="amount" type="number" placeholder="Amount" />
-              <select name="currency">
-                <option value="RON">RON</option>
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="JPY">JPY</option>
-                <option value="GBP">GBP</option>
-              </select>
-              <button type="submit">Transfer</button>
-            </form>`;
+      <div class="add-account">
+        ${addAccount}
+      </div>
 
-    const addAccount = html` <h3>Add a new account</h3>
-      <form @submit=${this._onCreateAccount}>
-        <input type="number" name="balance" placeholder="Initial deposit" />
-        <select name="currency">
-          <option value="RON">RON</option>
-          <option value="EUR">EUR</option>
-          <option value="USD">USD</option>
-          <option value="JPY">JPY</option>
-          <option value="GBP">GBP</option>
-        </select>
-        <button type="submit">Create Account</button>
-      </form>`;
+      <div class="make-transaction">
+        ${makeTransaction}
+      </div>
 
-    return html` <p class="intro">
-        <strong>Client: ${this.clientData.firstName} ${this.clientData.lastName} </strong>
-      </p>
+      <div class="transaction-history">
+        ${accountsDisplay}
+      </div>
 
-      <form class="email">
-        <input type="email" value=${this.clientData.email} disabled />
-        <button @click=${this._onEditEmail}>Change Email</button>
-        <button @click=${this._onSaveEmail} hidden>Save</button>
-        <button @click=${this._onCancelEmail} hidden>Cancel</button>
-      </form>
-
-      <form class="password">
-        <input type="password" name="oldPassword" placeholder="Old Password" hidden />
-        <input type="password" name="newPassword" placeholder="New Password" hidden />
-        <button @click=${this._onChangePassword}>Change Password</button>
-        <button @click=${this._onSaveNewPassword} hidden>Save</button>
-        <button @click=${this._onCancelPassword} hidden>Cancel</button>
-      </form>
-
-      ${accountsDisplay} ${addAccount}
-
-      <button @click=${this._onLogout}>Logout</button>`;
+      <div class="logout"><button @click=${this._onLogout}>Logout</button></div>
+    </div>`;
   }
 
   _onChangePassword(event) {
@@ -205,9 +300,14 @@ class InvoltAccount extends LitElement {
     const newPassword = edit.previousElementSibling;
     const oldPassword = newPassword.previousElementSibling;
 
-    if (newPassword.value === '') {
-      alert('Cannot have empty password');
+    let pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$');
+
+    if (!pattern.test(newPassword.value)) {
+      alert(
+        'Password not strong enough. Password should be at leat 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter, and 1 number'
+      );
       oldPassword.value = '';
+      newPassword.value = '';
       return;
     }
 
@@ -218,6 +318,7 @@ class InvoltAccount extends LitElement {
     cancel.hidden = true;
 
     if (oldPassword.value !== newPassword.value) {
+      console.log(oldPassword.value, newPassword.value);
       const response = await fetch(
         'http://localhost:8081/client/' +
           this.clientData.clientId +

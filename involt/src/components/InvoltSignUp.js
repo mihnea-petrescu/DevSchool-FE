@@ -77,27 +77,60 @@ class InvoltSignUp extends LitElement {
         outline-color: #0b84f6;
         outline-width: thick;
       }
+
+      .form-container {
+        display: table;
+        width: 100%;
+      }
+      .sign-up-form {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .logo-container {
+        text-align: center;
+        display: block;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+      }
     `;
   }
 
   render() {
-    return html` <div class="form-container">
-      <form class="sign-up-form" @submit=${this._onSubmit}>
-        <input name="firstName" type="text" placeholder="First Name" required />
-        <input name="lastName" type="text" placeholder="Last Name" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
-          title="Password should be at leat 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character (!@#$%^&*_=+-)"
-          required
-        />
-        <button id="sign-up" type="submit">Sign Up</button>
-        <a href="#">Already registered? <strong>Sign in</strong></a>
-      </form>
-    </div>`;
+    return html` <div class="logo-container">
+        <img src="media/logo.svg" width="320px" height="60px" />
+      </div>
+
+      <div class="form-container">
+        <form class="sign-up-form" @submit=${this._onSubmit}>
+          <p>
+            <input size="35" name="firstName" type="text" placeholder="First Name" required />
+          </p>
+
+          <p>
+            <input size="35" name="lastName" type="text" placeholder="Last Name" required />
+          </p>
+
+          <p>  
+          <input size="35" name="email" type="email" placeholder="Email" required />
+          </p>
+
+          <p>
+          <input
+              size="35"
+              name="password"
+              type="password"
+              placeholder="Password"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$"
+              title="Password should be at leat 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter and 1 number"
+            />
+          </p>
+            <button id="sign-up" type="submit">Sign Up</button>
+            <a href="#">Already registered? <strong>Sign in</strong></a>
+          </p>
+        </form>
+      </div>`;
   }
 
   async _onSubmit(event) {

@@ -23,13 +23,7 @@ export class InvoltMain extends LitElement {
   }
 
   render() {
-    return html` <div class="container" id="container">
-      <div class="logo-container">
-        <img src="media/logo.svg" width="328px" height="74px" />
-      </div>
-
-      ${this._pageTemplate}
-    </div>`;
+    return html` ${this._pageTemplate}`;
   }
 
   get _pageTemplate() {

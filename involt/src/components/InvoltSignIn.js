@@ -78,18 +78,43 @@ class InvoltSignIn extends LitElement {
         outline-color: #0b84f6;
         outline-width: thick;
       }
+
+      .form-container {
+        display: table;
+        width: 100%;
+      }
+      .sign-in-form {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .logo-container {
+        text-align: center;
+        display: block;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+      }
     `;
   }
 
   render() {
-    return html` <div class="form-container">
-      <form class="sign-in-form" @submit=${this._onSubmit}>
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="password" type="password" placeholder="Password" required />
-        <button id="sign-in" type="submit">Sign In</button>
-        <a href="#signup">New to Involt? Register now</a>
-      </form>
-    </div>`;
+    return html` <div class="logo-container">
+        <img src="media/logo.svg" width="320px" height="60px" />
+      </div>
+
+      <div class="form-container">
+        <form class="sign-in-form" @submit=${this._onSubmit}>
+          <p>
+            <input size="35" name="email" type="email" placeholder="Email" required />
+          </p>
+          <p>
+            <input size="35" name="password" type="password" placeholder="Password" required />
+          </p>
+          <button id="sign-in" type="submit">Sign In</button>
+          <a href="#signup">New to Involt? Register now</a>
+        </form>
+      </div>`;
   }
 
   async _onSubmit(event) {
